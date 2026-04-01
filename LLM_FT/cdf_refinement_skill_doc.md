@@ -46,7 +46,7 @@ $$
 :=
 \sum_{t=1}^{T}
 \left(
-\log \pi_\theta\!\left(y_t \mid x, y_{<t}\right) - \log \pi_{\mathrm{ref}} \left(y_t \mid x, y_{<t}\right)
+\log \pi_\theta \left(y_t \mid x, y_{<t}\right) - \log \pi_{\mathrm{ref}} \left(y_t \mid x, y_{<t}\right)
 \right).
 $$
 
