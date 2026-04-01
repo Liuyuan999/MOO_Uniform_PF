@@ -41,7 +41,7 @@ The code must optimize one policy for each `w`.
 
 For a sampled completion $y = (y_1,\dots,y_T)$, the standard sampled sequence-level KL surrogate is
 $$
-\widehat{\mathrm{KL}}(x,y) := \sum_{t=1}^T \left(\log \pi_\theta(y_t\mid x,y_{<t}) -\log \pi_{\mathrm{ref}}(y_t\mid x,y_{<t})\right).
+\widehat{\mathrm{KL}}(x,y)
 $$
 
 This is the practical term to use in the sampled RL objective.
