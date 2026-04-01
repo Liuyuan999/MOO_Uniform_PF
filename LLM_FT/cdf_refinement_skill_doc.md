@@ -24,7 +24,7 @@ J_w(\theta)
 :=
 \mathbb E_{x\sim D,\ y\sim \pi_\theta(\cdot|x)}
 \left[
-(1-w) r_1(x,y) + w r_2(x,y) - \beta\, \mathrm{KL}(\pi_\theta(\cdot|x)\|\pi_{\mathrm{ref}}(\cdot|x))
+(1-w) r_1(x,y) + w r_2(x,y) - \beta \mathrm{KL}(\pi_\theta(\cdot|x)\|\pi_{\mathrm{ref}}(\cdot|x))
 \right].
 $$
 
@@ -58,7 +58,7 @@ Then define sampled return
 $$
 R_w(x,y)
 :=
-(1-w) r_1(x,y) + w r_2(x,y) - \beta \, \widehat{\mathrm{KL}}(x,y).
+(1-w) r_1(x,y) + w r_2(x,y) - \beta  \widehat{\mathrm{KL}}(x,y).
 $$
 
 The implementation must compute:
@@ -95,7 +95,7 @@ $$
 =
 -rac1B 
 \sum_{i=1}^B
-A_i \, \log \pi_\theta(y^{(i)}|x^{(i)}).
+A_i  \log \pi_\theta(y^{(i)}|x^{(i)}).
 $$
 
 The KL penalty is already included inside `R_i`; do not subtract it again inside the loss.
@@ -225,7 +225,7 @@ This `\tilde F_t` is the surrogate arc-length CDF.
 Update by convex blending:
 
 $$
-F_{t+1}(w) = \alpha \, \tilde F_t(w) + (1-\alpha) F_t(w),
+F_{t+1}(w) = \alpha  \tilde F_t(w) + (1-\alpha) F_t(w),
 \qquad \alpha \in (0,1].
 $$
 
