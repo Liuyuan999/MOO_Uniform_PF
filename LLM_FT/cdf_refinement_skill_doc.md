@@ -45,8 +45,7 @@ the standard sampled sequence-level KL surrogate is
 $$
 \widehat{\mathrm{KL}}(x,y) := \sum_{t=1}^T
 \left(
-\log \pi_\theta(y_t\mid x,y_{<t})
--
+\log \pi_\theta(y_t\mid x,y_{<t}) -
 \log \pi_{\mathrm{ref}}(y_t\mid x,y_{<t})
 \right).
 $$
@@ -92,8 +91,7 @@ Then optimize the loss
 
 $$
 \mathcal L_{\mathrm{RL}}(\theta)
-=
--rac1B 
+= -rac1B 
 \sum_{i=1}^B
 A_i  \log \pi_\theta(y^{(i)}|x^{(i)}).
 $$
@@ -134,9 +132,7 @@ $$
 then the Rewarded Soup baseline is the adapter interpolation path
 
 $$
-\theta_{\mathrm{RS}}(\lambda)
-=
-(1-\lambda)\theta^{(0)} + \lambda\theta^{(1)},
+\theta_{\mathrm{RS}}(\lambda)= (1-\lambda)\theta^{(0)} + \lambda\theta^{(1)},
 \qquad \lambda\in[0,1].
 $$
 
