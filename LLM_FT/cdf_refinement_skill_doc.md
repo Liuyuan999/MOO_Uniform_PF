@@ -77,7 +77,7 @@ $$
 Let
 
 $$
-\log \pi_\theta(y^{(i)}|x^{(i)})
+\log \pi_\theta(y^{(i)}|x^{(i)})  = \sum_{t=1}^{T_i} \log \pi_\theta(y_t^{(i)}\mid x^{(i)}, y_{<t}^{(i)}).
 $$
 
 Then optimize the loss
