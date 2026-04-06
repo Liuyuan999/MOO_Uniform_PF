@@ -1,12 +1,8 @@
 # MOO_Uniform_PF
 
+DST taks in folder `DST`
 
-Plan for MAR 28-APR 03
-
-Liuyuan
-- Plot $\|F_t-F^{\rm (arc)}_w\|$ linear convergence plot and finish writing on DST section. Code in `Policy_update_DST_with_baseline.ipynb`.
-- Start working with LLM problem. Goal: beat [Souping Method Fig.7](https://arxiv.org/pdf/2306.04488) and achieve uniformity.
-
+Plan for APR 06 -APR 10
 
 Chentong
 - By Wednesday (APR 01), finish on Bandit case:
