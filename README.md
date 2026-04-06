@@ -7,5 +7,5 @@ Plan for APR 06 -APR 10
 Chentong
 - By Wednesday (APR 08), implement CDF-refinement and Equispaced on one Mo-gym task.
   
-- By Friday (APR 10), implement Souping (and other algorithms if time permits) and obtain metrics.
+- By Friday (APR 10), implement Souping (and other algorithms if time permits), obtain metrics and fill in the table.
  
