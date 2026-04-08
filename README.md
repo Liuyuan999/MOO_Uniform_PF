@@ -9,4 +9,4 @@ Chentong
   
 - By Friday (APR 10), implement Souping, UMOD, OLS (and other algorithms if time permits), obtain metrics and fill in the table.
 
- Problem Setup
+ Description the problem setup in Appendix
