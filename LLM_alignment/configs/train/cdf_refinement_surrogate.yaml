@@ -1,0 +1,70 @@
+# Surrogate CDF run that reuses LS endpoints per outer iteration when available.
+# Middle slots are trained; outer_iter_0 middle slots are initialized from LS outer_iter_0.
+
+run_name: cdf-refinement-surrogate-from-ls
+output_root: outputs/cdf_refinement
+
+seed: 0
+num_outer_iters: 10
+num_segments: 5
+alpha: 0.3
+
+cdf_grid_size: 101
+use_pchip: true
+monotone_eps: 1.0e-8
+force_endpoints: true
+
+execution:
+  mode: parallel
+  max_concurrent_jobs: 4
+
+warm_start:
+  strategy: same_index_then_nearest
+  allow_endpoint_interp: true
+  explicit_init_adapter: null
+  apply_explicit_every_outer_iter: false
+  # Seed middle slots on outer_iter_0 from LS outer_iter_0.
+  init_adapters_by_slot:
+    1: outputs/ls_uniform/ls-uniform-demo/outer_iter_0/adapter_1/checkpoint_final
+    2: outputs/ls_uniform/ls-uniform-demo/outer_iter_0/adapter_2/checkpoint_final
+    3: outputs/ls_uniform/ls-uniform-demo/outer_iter_0/adapter_3/checkpoint_final
+    4: outputs/ls_uniform/ls-uniform-demo/outer_iter_0/adapter_4/checkpoint_final
+
+inner_loop:
+  budget_mode: epochs
+  budget_value: 1
+  # In parallel mode each job is pinned to one GPU.
+  num_processes: 1
+
+evaluation:
+  pf_source: training_log
+  tail_fraction: 0.2
+  objective_coordinates: raw_rewards
+  deterministic_decoding: true
+  max_eval_samples: 512
+  split: train
+
+resume:
+  enabled: false
+  run_root: null
+  require_config_match: true
+
+endpoint_reuse:
+  enabled: true
+  source_run_root: outputs/ls_uniform/ls-uniform-demo
+  # Reuse all slots on outer_iter_0 (no inner retraining at iter 0).
+  # For outer_iter>0, only endpoints (slot 0 and slot N) are reused.
+  reuse_all_slots_on_outer0: true
+  # If a source endpoint does not exist for a later outer iter, train normally.
+  fallback_when_missing: train
+
+ppo_config_paths:
+  - configs/model/qwen_0p5b_dora.yaml
+  - configs/task/reddit_summarization.yaml
+  - configs/rl/ppo.yaml
+  - configs/eval/default.yaml
+
+ppo_overrides:
+  rl:
+    adaptive_kl: false
+    init_kl_coef: 0.05

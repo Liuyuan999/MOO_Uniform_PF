@@ -1,0 +1,80 @@
+# Outer-loop CDF refinement for arc-length-uniform Pareto coverage (see docs/cdf_refinement_skill_doc.md).
+# Inner solver: qwen.train_ppo (PPO). PPO hyperparameters come from merged ppo_config_paths + ppo_overrides.
+
+run_name: cdf-refinement-demo
+output_root: outputs/cdf_refinement
+
+seed: 0
+
+num_outer_iters: 10
+num_segments: 5
+alpha: 0.5
+
+cdf_grid_size: 101
+use_pchip: true
+monotone_eps: 1.0e-8
+force_endpoints: true
+
+# execution:
+#   # sequential: run one inner PPO job at a time (num_processes can be >1 via accelerate launch)
+#   # parallel:   run up to max_concurrent_jobs inner PPO jobs at once; each gets one GPU via
+#   #             CUDA_VISIBLE_DEVICES; num_processes is forced to 1 per job in this mode
+#   mode: sequential
+#   max_concurrent_jobs: 1
+
+execution:
+  mode: parallel          # was: sequential
+  max_concurrent_jobs: 4
+
+warm_start:
+  strategy: same_index_then_nearest
+  allow_endpoint_interp: true
+  # Single adapter for all inner jobs (optional). If set with apply_explicit_every_outer_iter: true,
+  # every slot and every outer iteration loads this checkpoint (old behavior).
+  explicit_init_adapter: outputs/run/Qwen2.5-0.5B-Instruct-ppo-summary-w0p5-0412-113840/checkpoint_epoch_0009/adapter
+  # If false: outer_iter > 0 uses same-slot / nearest / interp from previous outer iter; explicit
+  # adapter is only a fallback when warm start is missing, and seeds outer_iter 0 when no per-slot path.
+  apply_explicit_every_outer_iter: true
+  # Optional: list of length num_segments+1 or dict slot -> path; outer_iter 0 uses per-slot path first.
+  # Example dict: {0: path/to/w0_adapter, 1: path/to/w1_adapter, ...}
+  init_adapters_by_slot: null
+  # init_adapters_by_slot:
+  #   0: path/to/adapter_w0
+  #   1: path/to/adapter_w1
+    # ... up to num_segments
+inner_loop:
+  budget_mode: epochs
+  budget_value: 1
+  # 1 = in-process PPO; 2+ = `accelerate launch --num_processes K -m qwen.train_ppo ...` per inner job.
+  num_processes: 1
+
+evaluation:
+  # "training_log" (default): fast, no GPU — averages mean_reward_1/2 over the last
+  # tail_fraction of training batches from training_metrics.jsonl.
+  # "eval": separate inference pass on held-out samples (slow but deterministic).
+  pf_source: training_log
+  tail_fraction: 0.3          # fraction of training steps (from end) to average
+  # --- below only used when pf_source: eval ---
+  objective_coordinates: raw_rewards
+  deterministic_decoding: true
+  max_eval_samples: 512
+  split: train
+
+resume:
+  # Enable true outer-loop resume from existing output histories/checkpoints.
+  enabled: true
+  # Optional run root to resume from. If null, uses output_root/run_name.
+  run_root: outputs/cdf_refinement/cdf-refinement-demo
+  # If true, require existing ppo_merged_stack.yaml to match current merged PPO config exactly.
+  require_config_match: true
+
+ppo_config_paths:
+  - configs/model/qwen_0p5b_dora.yaml
+  - configs/task/reddit_summarization.yaml
+  - configs/rl/ppo.yaml
+  - configs/eval/default.yaml
+
+ppo_overrides:
+  rl:
+    adaptive_kl: false
+    init_kl_coef: 0.05

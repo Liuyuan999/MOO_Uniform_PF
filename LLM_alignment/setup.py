@@ -1,0 +1,19 @@
+from setuptools import setup
+
+setup(
+    name="llm-ft",
+    version="0.2.0",
+    packages=["qwen", "qwen.utils", "qwen.tasks"],
+    python_requires=">=3.10",
+    install_requires=[
+        "numpy>=1.24",
+        "PyYAML>=6.0",
+        "torch>=2.1",
+        "transformers>=4.40",
+        "peft>=0.11",
+        "trl>=0.8",
+        "datasets>=2.16",
+        "accelerate>=0.26",
+        "tqdm>=4.65",
+    ],
+)

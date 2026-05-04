@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: llm-ft
+Version: 0.2.0
+Summary: Qwen PPO + Rewarded Soup (first milestone)
+Requires-Python: >=3.10
+Requires-Dist: numpy>=1.24
+Requires-Dist: PyYAML>=6.0
+Requires-Dist: torch>=2.1
+Requires-Dist: transformers>=4.40
+Requires-Dist: peft>=0.11
+Requires-Dist: trl>=0.8
+Requires-Dist: datasets>=2.16
+Requires-Dist: accelerate>=0.26
+Requires-Dist: tqdm>=4.65
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+Dynamic: requires-python

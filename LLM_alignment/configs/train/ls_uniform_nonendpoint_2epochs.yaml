@@ -1,0 +1,52 @@
+# Continue LS uniform training from ls-uniform-demo while skipping endpoint retraining.
+# Usage pattern:
+#   1) Pre-seed outer_iter_9 endpoint checkpoints (slot 0 and slot 5) by copying
+#      from outer_iter_8/checkpoint_final.
+#   2) Run this config once; only middle slots (1..4) train for 2 epochs.
+
+run_name: ls-uniform-demo
+output_root: outputs/ls_uniform
+
+seed: 0
+num_outer_iters: 10
+num_segments: 5
+cdf_grid_size: 2001
+
+execution:
+  mode: parallel
+  max_concurrent_jobs: 4
+
+warm_start:
+  strategy: same_index_then_nearest
+  explicit_init_adapter: null
+  apply_explicit_every_outer_iter: false
+  init_adapters_by_slot: null
+
+inner_loop:
+  budget_mode: epochs
+  budget_value: 2
+  num_processes: 1
+
+evaluation:
+  pf_source: training_log
+  tail_fraction: 0.3
+  objective_coordinates: raw_rewards
+  deterministic_decoding: true
+  max_eval_samples: 512
+  split: train
+
+resume:
+  enabled: true
+  run_root: outputs/ls_uniform/ls-uniform-demo
+  require_config_match: true
+
+ppo_config_paths:
+  - configs/model/qwen_0p5b_dora.yaml
+  - configs/task/reddit_summarization.yaml
+  - configs/rl/ppo.yaml
+  - configs/eval/default.yaml
+
+ppo_overrides:
+  rl:
+    adaptive_kl: false
+    init_kl_coef: 0.05

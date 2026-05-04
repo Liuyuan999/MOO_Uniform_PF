@@ -1,0 +1,13 @@
+task:
+  name: reddit_summarization
+  dataset_name: openai
+  train_split: train
+  eval_split: validation
+  max_prompts_debug: 32
+  max_train_samples: 4096
+  reward_models:
+    - Tristan/gpt2_reward_summarization
+    - CogComp/bart-faithful-summary-detector
+  reward_formats:
+    - "0"
+    - "1-0"

@@ -1,0 +1,16 @@
+rl:
+  algorithm: reinforce
+  # KL penalty coefficient beta: R_total = scalarized_reward - beta * KL_seq
+  # Uses the same key as PPO (init_kl_coef) for RunConfig compatibility.
+  init_kl_coef: 0.1
+  learning_rate: 1.0e-5
+  batch_size: 15 #32
+  mini_batch_size: 16           # unused by REINFORCE; kept for RunConfig compatibility
+  gradient_accumulation_steps: 2
+  num_epochs: 5
+  output_min_length: 16        # unused by REINFORCE; kept for RunConfig compatibility
+  output_max_length: 128       # max new tokens to generate per sample
+  log_with: null
+  # Optional mid-epoch checkpoints (same options as PPO):
+  save_per_epoch_fraction: 16   # save every ~1/16 of a dataloader epoch (plus per-epoch saves)
+  # save_every_n_updates: null    # if set to a positive int, overrides fraction; save every N updates

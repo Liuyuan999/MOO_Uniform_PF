@@ -1,0 +1,17 @@
+rl:
+  algorithm: ppo
+  init_kl_coef: 0.05
+  learning_rate: 5.0e-5
+  batch_size: 64
+  mini_batch_size: 16
+  gradient_accumulation_steps: 1
+  num_epochs: 10
+  output_min_length: 16
+  output_max_length: 32
+  log_with: null
+  # KL coefficient: fixed by default (adap_kl_ctrl=False in TRL PPOConfig).
+  # Set to true to let TRL adaptively tune the coefficient toward target_kl.
+  # adaptive_kl: false
+  # Optional mid-epoch checkpoints (see qwen/utils/ppo_utils.py Runner.train_ppo):
+  save_per_epoch_fraction: 8   # save every ~1/16 of a dataloader epoch (plus per-epoch saves)
+  # save_every_n_updates: null     # if set to a positive int, overrides fraction; save every N updates

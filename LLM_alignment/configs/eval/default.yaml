@@ -1,0 +1,4 @@
+eval:
+  batch_size: 64
+  max_new_tokens: 128
+  num_samples: 512

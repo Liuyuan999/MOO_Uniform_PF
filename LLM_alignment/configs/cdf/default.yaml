@@ -1,0 +1,5 @@
+cdf:
+  num_segments: 5
+  outer_iters: 2
+  cdf_blend_alpha: 0.5
+  cdf_grid_size: 4096

@@ -1,0 +1,71 @@
+# Outer-loop LS with fixed equispaced scalarization weights.
+# Output layout mirrors cdf_refinement:
+#   outputs/.../<run_name>/outer_iter_k/adapter_n/checkpoint_final
+#   + weight_history.json / pf_history.json / metric_history.json / cdf_history.json / checkpoint_mapping.json
+
+run_name: ls-uniform-demo
+output_root: outputs/ls_uniform
+
+seed: 0
+num_outer_iters: 9
+num_segments: 5
+cdf_grid_size: 2001
+
+execution:
+  # sequential: run one inner PPO job at a time (num_processes can be >1 via accelerate launch)
+  # parallel:   run up to max_concurrent_jobs inner PPO jobs at once; each gets one GPU via
+  #             CUDA_VISIBLE_DEVICES; num_processes is forced to 1 per job in this mode
+  mode: parallel
+  max_concurrent_jobs: 2
+
+warm_start:
+  strategy: same_index_then_nearest
+  # If set with apply_explicit_every_outer_iter: true, all jobs seed from this adapter every outer iter.
+  explicit_init_adapter: null
+  # If false: outer_iter > 0 prefers same-slot from previous outer iter.
+  apply_explicit_every_outer_iter: false
+  # Optional per-slot seeds for outer_iter_0 (length num_segments+1 list or slot->path dict).
+  # Example to continue from CDF outer_iter_0:
+  init_adapters_by_slot:
+    0: outputs/cdf_refinement/cdf-refinement-demo/outer_iter_0/adapter_0/checkpoint_final
+    1: outputs/cdf_refinement/cdf-refinement-demo/outer_iter_0/adapter_1/checkpoint_final
+    2: outputs/cdf_refinement/cdf-refinement-demo/outer_iter_0/adapter_2/checkpoint_final
+    3: outputs/cdf_refinement/cdf-refinement-demo/outer_iter_0/adapter_3/checkpoint_final
+    4: outputs/cdf_refinement/cdf-refinement-demo/outer_iter_0/adapter_4/checkpoint_final
+    5: outputs/cdf_refinement/cdf-refinement-demo/outer_iter_0/adapter_5/checkpoint_final
+  # init_adapters_by_slot: null
+
+inner_loop:
+  budget_mode: epochs
+  budget_value: 1
+  # 1 = in-process PPO, >1 = accelerate launch --num_processes K
+  # Set to 1 when execution.mode=parallel (each job gets its own GPU via CUDA_VISIBLE_DEVICES)
+  num_processes: 1
+
+evaluation:
+  # "training_log" (default): fast, no GPU — averages mean_reward_1/2 over the last
+  # tail_fraction of training batches from training_metrics.jsonl.
+  # "eval": separate inference pass on held-out samples (slow but deterministic).
+  pf_source: training_log
+  tail_fraction: 0.3          # fraction of training steps (from end) to average
+  # --- below only used when pf_source: eval ---
+  objective_coordinates: raw_rewards
+  deterministic_decoding: true
+  max_eval_samples: 512
+  split: train
+
+resume:
+  enabled: true
+  run_root: outputs/ls_uniform/ls-uniform-demo
+  require_config_match: true
+
+ppo_config_paths:
+  - configs/model/qwen_0p5b_dora.yaml
+  - configs/task/reddit_summarization.yaml
+  - configs/rl/ppo.yaml
+  - configs/eval/default.yaml
+
+ppo_overrides:
+  rl:
+    adaptive_kl: false
+    init_kl_coef: 0.05

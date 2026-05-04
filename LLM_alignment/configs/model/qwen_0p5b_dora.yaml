@@ -1,0 +1,25 @@
+model:
+  name: Qwen/Qwen2.5-0.5B-Instruct
+  tokenizer_name: Qwen/Qwen2.5-0.5B-Instruct
+
+  trust_remote_code: true
+
+  dtype: bfloat16
+  # device_map: auto
+
+peft:
+  method: lora
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+hf:
+  local_cache: ./hf_cache
