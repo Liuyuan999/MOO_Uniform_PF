@@ -1,4 +1,4 @@
-# SURF: Uniform Pareto-Front Sampling for Scalarization
+# SURF: Steering the Scalarization Weight to Uniformly Traverse the Pareto Front
 
 This repository provides code for reproducing the experiments in the paper on **SURF**, a scalarization-based framework for sampling uniformly along the Pareto front in multi-objective optimization.
 
