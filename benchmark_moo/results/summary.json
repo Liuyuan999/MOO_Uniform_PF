@@ -17,7 +17,8 @@
   },
   "caveats": [
     "This is a front-oracle geometry diagnostic, not an end-to-end stochastic-optimizer benchmark.",
-    "ZDT3 and DTLZ7 are disconnected. Global CV and GapRatio include cross-component jumps; component-aware variants exclude those jumps.",
+    "ZDT3, DTLZ7, and WFG2 are disconnected. Global CV and GapRatio include cross-component jumps; component-aware variants exclude those jumps.",
+    "WFG4 (concave, connected) and WFG2 (convex, disconnected) use Huband/pymoo M=2 zero-distance PF shape functions.",
     "NBI is evaluated as a CHIM normal-line/front-oracle baseline. Missing normal-line intersections are reported rather than imputed."
   ],
   "benchmarks": {
@@ -219,6 +220,140 @@
           "ComponentGapRatio": 1.2292580346904884,
           "n_points": 13,
           "n_unique": 13
+        }
+      }
+    },
+    "WFG4": {
+      "n_components": 1,
+      "disconnected": false,
+      "NBI_missing_targets": 0,
+      "methods": {
+        "Uniform LS": {
+          "HV": 0.8800000000000009,
+          "IGD": 1.1241486675682641,
+          "CV": 3.741657386773941,
+          "GapRatio": null,
+          "ComponentCV": 3.741657386773941,
+          "ComponentGapRatio": null,
+          "n_points": 16,
+          "n_unique": 2
+        },
+        "LS + SURF": {
+          "HV": 0.8800000000000009,
+          "IGD": 1.1241486675682641,
+          "CV": 3.741657386773941,
+          "GapRatio": null,
+          "ComponentCV": 3.741657386773941,
+          "ComponentGapRatio": null,
+          "n_points": 16,
+          "n_unique": 2
+        },
+        "Uniform Chebyshev": {
+          "HV": 0.8796052360998604,
+          "IGD": 0.09070554160360013,
+          "CV": 0.3326137249541791,
+          "GapRatio": 3.2931308074953303,
+          "ComponentCV": 0.3326137249541791,
+          "ComponentGapRatio": 3.2931308074953303,
+          "n_points": 16,
+          "n_unique": 16
+        },
+        "Chebyshev + SURF": {
+          "HV": 0.8796052360998604,
+          "IGD": 0.08051550019413817,
+          "CV": 3.3667924124502895e-05,
+          "GapRatio": 1.000129822868784,
+          "ComponentCV": 3.3667924124502895e-05,
+          "ComponentGapRatio": 1.000129822868784,
+          "n_points": 16,
+          "n_unique": 16
+        },
+        "Equal arc-length oracle": {
+          "HV": 0.8800000000000009,
+          "IGD": 0.08071885842280488,
+          "CV": 0.001145434545760555,
+          "GapRatio": 1.0040693645678176,
+          "ComponentCV": 0.001145434545760555,
+          "ComponentGapRatio": 1.0040693645678176,
+          "n_points": 16,
+          "n_unique": 16
+        },
+        "NBI normal-line oracle": {
+          "HV": 0.8800000000000009,
+          "IGD": 0.08054948570170899,
+          "CV": 0.1032800489407792,
+          "GapRatio": 1.3803537281470248,
+          "ComponentCV": 0.1032800489407792,
+          "ComponentGapRatio": 1.3803537281470248,
+          "n_points": 16,
+          "n_unique": 16
+        }
+      }
+    },
+    "WFG2": {
+      "n_components": 6,
+      "disconnected": true,
+      "NBI_missing_targets": 2,
+      "methods": {
+        "Uniform LS": {
+          "HV": 0.8799999999999999,
+          "IGD": 0.23227811448073124,
+          "CV": 1.8206148687185837,
+          "GapRatio": null,
+          "ComponentCV": 2.241981130995734,
+          "ComponentGapRatio": null,
+          "n_points": 16,
+          "n_unique": 8
+        },
+        "LS + SURF": {
+          "HV": 0.8799999999999999,
+          "IGD": 0.18028414783400987,
+          "CV": 1.3923362464484192,
+          "GapRatio": null,
+          "ComponentCV": 1.6174858716526088,
+          "ComponentGapRatio": null,
+          "n_points": 16,
+          "n_unique": 15
+        },
+        "Uniform Chebyshev": {
+          "HV": 0.8858175725884008,
+          "IGD": 0.10763843953944309,
+          "CV": 0.7018176506420275,
+          "GapRatio": 22.79754136834042,
+          "ComponentCV": 0.6362466470107905,
+          "ComponentGapRatio": 12.958222492090119,
+          "n_points": 16,
+          "n_unique": 16
+        },
+        "Chebyshev + SURF": {
+          "HV": 0.8858175725884008,
+          "IGD": 0.06929062479923277,
+          "CV": 0.28961870114754007,
+          "GapRatio": 4.965064979894577,
+          "ComponentCV": 0.23937637223025185,
+          "ComponentGapRatio": 3.201266390503836,
+          "n_points": 16,
+          "n_unique": 16
+        },
+        "Equal arc-length oracle": {
+          "HV": 0.8799999999999999,
+          "IGD": 0.06842923148627875,
+          "CV": 0.33569609713844595,
+          "GapRatio": 2.270362473537817,
+          "ComponentCV": 0.002415631998388679,
+          "ComponentGapRatio": 1.0061003815404377,
+          "n_points": 16,
+          "n_unique": 16
+        },
+        "NBI normal-line oracle": {
+          "HV": 0.8799999999999999,
+          "IGD": 0.08208784696347504,
+          "CV": 0.23244568081271222,
+          "GapRatio": 2.160773869652745,
+          "ComponentCV": 0.027548730091163674,
+          "ComponentGapRatio": 1.0678701024931416,
+          "n_points": 14,
+          "n_unique": 14
         }
       }
     }

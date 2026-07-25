@@ -71,7 +71,19 @@ def make_fronts() -> dict[str, Front]:
     # DTLZ2 with g=0: (cos(theta), sin(theta)), reordered by f1.
     dtlz2_points = np.column_stack((np.cos(theta), np.sin(theta)))[::-1]
     dtlz2 = Front("DTLZ2 (M=2)", dtlz2_points, np.zeros(N_FRONT, dtype=int))
-    return {"ZDT3": zdt3, "DTLZ2": dtlz2, "DTLZ7": dtlz7}
+    # WFG M=2 zero-distance PF shapes (Huband et al. / pymoo shape functions).
+    # WFG4: concave connected; WFG2: convex + disconnected (A=5).
+    wfg4 = nondominated_curve(
+        2.0 * np.sin(0.5 * np.pi * x),
+        4.0 * np.cos(0.5 * np.pi * x),
+        "WFG4 (M=2)",
+    )
+    wfg2 = nondominated_curve(
+        2.0 * (1.0 - np.cos(0.5 * np.pi * x)),
+        4.0 * (1.0 - x * np.cos(5.0 * np.pi * x) ** 2),
+        "WFG2 (M=2)",
+    )
+    return {"ZDT3": zdt3, "DTLZ2": dtlz2, "DTLZ7": dtlz7, "WFG4": wfg4, "WFG2": wfg2}
 
 
 def scalar_select(front: Front, weight: float, scalarizer: str) -> np.ndarray:
@@ -256,7 +268,8 @@ def main() -> None:
         },
         "caveats": [
             "This is a front-oracle geometry diagnostic, not an end-to-end stochastic-optimizer benchmark.",
-            "ZDT3 and DTLZ7 are disconnected. Global CV and GapRatio include cross-component jumps; component-aware variants exclude those jumps.",
+            "ZDT3, DTLZ7, and WFG2 are disconnected. Global CV and GapRatio include cross-component jumps; component-aware variants exclude those jumps.",
+            "WFG4 (concave, connected) and WFG2 (convex, disconnected) use Huband/pymoo M=2 zero-distance PF shape functions.",
             "NBI is evaluated as a CHIM normal-line/front-oracle baseline. Missing normal-line intersections are reported rather than imputed.",
         ],
         "benchmarks": {},
