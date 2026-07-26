@@ -32,23 +32,6 @@ The DST and FishWood notebooks also contain follow-up baseline extensions.
 - `benchmark_moo/`: Deterministic front-oracle benchmark suite for ZDT3,
   DTLZ2, DTLZ7, WFG4, and WFG2.
 
-## Setup
-
-Use Python 3.11 with NumPy, SciPy, Matplotlib, `pymoo`, and
-`mo-gymnasium`:
-
-```bash
-uv venv ../.venv --python 3.11
-uv pip install --python ../.venv/bin/python numpy scipy matplotlib pymoo mo-gymnasium
-```
-
-The LLM alignment workflow also downloads Hugging Face models, datasets, and
-reward models unless they are already cached. Configure GPU resources, local
-cache directories, and checkpoint paths in `LLM_alignment/configs/` before
-launching large runs.
-
-## Running the diagnostics
-
 `Tchebycheff_nonconvex/run_experiments.py` reproduces the exact-inner-solver
 ZDT2/Circle diagnostic and writes figures and `figure/metrics.txt`.
 
@@ -68,6 +51,23 @@ Pareto-front figures in `benchmark_moo/figures/`.
 This suite is a deterministic front-oracle geometry diagnostic, not an
 end-to-end stochastic-optimizer comparison. It reports component-aware
 spacing metrics for the disconnected ZDT3, DTLZ7, and WFG2 fronts.
+
+## Setup
+
+Use Python 3.11 with NumPy, SciPy, Matplotlib, `pymoo`, and
+`mo-gymnasium`:
+
+```bash
+uv venv ../.venv --python 3.11
+uv pip install --python ../.venv/bin/python numpy scipy matplotlib pymoo mo-gymnasium
+```
+
+The LLM alignment workflow also downloads Hugging Face models, datasets, and
+reward models unless they are already cached. Configure GPU resources, local
+cache directories, and checkpoint paths in `LLM_alignment/configs/` before
+launching large runs.
+
+
 
 ## Reproducibility notes
 
