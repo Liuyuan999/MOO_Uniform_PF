@@ -21,38 +21,12 @@ This repository contains the submitted-paper experiments, which use SURF with li
 
 ## Setup
 
-The lightweight diagnostics and notebooks use Python 3.10+ or 3.11. A typical
-setup is:
+Use Python 3.11 with NumPy, SciPy, Matplotlib,
+`pymoo`, and `mo-gymnasium`:
 
 ```bash
-git clone https://github.com/Liuyuan999/MOO_Uniform_PF.git
-cd MOO_Uniform_PF
-
-python -m venv .venv
-source .venv/bin/activate
-
-pip install --upgrade pip
-pip install numpy scipy matplotlib pymoo mo-gymnasium jupyter
-```
-
-Install PyTorch according to your hardware and CUDA version. For the policy
-notebooks, install it before running the notebooks:
-
-```bash
-pip install torch
-```
-
-Some baseline cells use MORL-Baselines:
-
-```bash
-pip install morl-baselines
-```
-
-For the LLM-alignment experiment:
-
-```bash
-cd LLM_alignment
-pip install -e .
+uv venv ../.venv --python 3.11
+uv pip install --python ../.venv/bin/python numpy scipy matplotlib pymoo mo-gymnasium
 ```
 
 The LLM workflow downloads Hugging Face models, datasets, and reward models
