@@ -18,6 +18,28 @@ This repository contains the submitted-paper experiments, which use SURF with li
 
 - `Tchebycheff_nonconvex/`: Weighted Chebyshev + SURF diagnostic on non-convex fronts such as ZDT2 and Circle.
 - `benchmark_moo/`: Deterministic front-oracle benchmark suite for ZDT3, DTLZ2, DTLZ7, WFG4, and WFG2.
+## Post-submission diagnostics
+
+- `Tchebycheff_nonconvex/run_experiments.py` reproduces the exact-inner-solver
+  ZDT2/Circle Tchebysheff-SURF diagnostic and writes figures plus
+  `figure/metrics.txt`.
+- `benchmark_moo/run_benchmarks.py` runs the fixed \(N=15\), \(T=30\),
+  \(\alpha=0.3\) two-objective ZDT3/DTLZ2/DTLZ7 front-oracle suite with LS,
+  weighted Chebyshev, SURF, equal-arc-length, and NBI normal-line baselines:
+
+  ```bash
+  MPLCONFIGDIR=/tmp/matplotlib ../.venv/bin/python benchmark_moo/run_benchmarks.py
+  ```
+
+  It writes JSON/CSV metrics and PF figures under `benchmark_moo/`. This is a
+  deterministic front-oracle geometry diagnostic—not an end-to-end
+  stochastic-optimizer comparison—and reports component-aware metrics for
+  the disconnected ZDT3 and DTLZ7 fronts.
+- `DST/Policy_update_DST_with_baseline.ipynb` and
+  `Fishwood/Policy_update_Fishwood_with_baseline.ipynb` contain follow-up
+  NBI, epsilon-constraint, continuation, and equal-spacing implementations.
+  Only submitted-paper baselines have multi-seed tables; rerun the extended
+  cells before presenting aggregate results.
 
 ## Setup
 
