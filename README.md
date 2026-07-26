@@ -4,21 +4,20 @@ This repository contains the code for SURF, a scalarization-based framework for 
 
 This repository contains the submitted-paper experiments, which use SURF with linear scalarization, plus separate post-submission diagnostics that extend SURF to Chebyshev scalarization on non-convex and benchmark Pareto fronts.
 
-
 ## Repository Layout
 
-| Path | Description |
-| --- | --- |
-| `uniform_PF.ipynb` | Submitted-paper offline bandit toy problem comparing uniform weights with arc-length-uniform weights. |
-| `DST/Policy_update_DST_with_baseline.ipynb` | Submitted-paper Deep Sea Treasure policy-optimization experiment with SURF, uniform-weight, OLS, souping, UMOD, NBI, epsilon-constraint, continuation, and equal-spacing baselines. Some cells contain follow-up baseline extensions. |
-| `Fishwood/Policy_update_Fishwood_with_baseline.ipynb` | Submitted-paper tabular FishWood experiment using the same CDF refinement and baseline structure. Some cells contain follow-up baseline extensions. |
-| `Mountaincar/Policy_update_MountainCar_with_baseline.ipynb` | Submitted-paper MO-MountainCar experiment with policy-gradient inner solves and seed-wise comparison tables. |
-| `LLM_alignment/` | Submitted-paper Qwen PPO/REINFORCE code for Reddit summarization alignment with two reward models, LS baselines, SURF/CDF refinement, evaluation, and souping utilities. |
-| `Tchebycheff_nonconvex/` | Post-submission weighted Chebyshev + SURF diagnostic on non-convex fronts such as ZDT2 and Circle. |
-| `benchmark_moo/` | Post-submission deterministic front-oracle benchmark suite for ZDT3, DTLZ2, DTLZ7, WFG4, and WFG2. |
+**Submitted-paper experiments**
 
+- `uniform_PF.ipynb`: Offline bandit toy problem comparing uniform weights with arc-length-uniform weights.
+- `DST/Policy_update_DST_with_baseline.ipynb`: Deep Sea Treasure policy-optimization experiment with SURF, uniform-weight, OLS, souping, UMOD, NBI, epsilon-constraint, continuation, and equal-spacing baselines. Some cells contain follow-up baseline extensions.
+- `Fishwood/Policy_update_Fishwood_with_baseline.ipynb`: Tabular FishWood experiment using the same CDF refinement and baseline structure. Some cells contain follow-up baseline extensions.
+- `Mountaincar/Policy_update_MountainCar_with_baseline.ipynb`: MO-MountainCar experiment with policy-gradient inner solves and seed-wise comparison tables.
+- `LLM_alignment/`: Qwen PPO/REINFORCE code for Reddit summarization alignment with two reward models, LS baselines, SURF/CDF refinement, evaluation, and souping utilities.
 
+**Post-submission diagnostics**
 
+- `Tchebycheff_nonconvex/`: Weighted Chebyshev + SURF diagnostic on non-convex fronts such as ZDT2 and Circle.
+- `benchmark_moo/`: Deterministic front-oracle benchmark suite for ZDT3, DTLZ2, DTLZ7, WFG4, and WFG2.
 
 ## Setup
 
