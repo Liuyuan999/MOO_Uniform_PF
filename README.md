@@ -15,16 +15,15 @@ weighted Chebyshev scalarization on non-convex and benchmark Pareto fronts.
   policy-optimization experiment with SURF, uniform-weight, OLS, souping,
   UMOD, NBI, epsilon-constraint, continuation, and equal-spacing baselines.
 - `Fishwood/Policy_update_Fishwood_with_baseline.ipynb`: Tabular FishWood
-  experiment using the same CDF refinement and baseline structure.
+  experiment following the same SURF and baseline-evaluation framework as the Deep Sea Treasure experiment.
 - `Mountaincar/Policy_update_MountainCar_with_baseline.ipynb`:
   MO-MountainCar experiment with policy-gradient inner solves and seed-wise
   comparison tables.
 - `LLM_alignment/`: Qwen PPO/REINFORCE workflow for Reddit summarization
-  alignment with two reward models, linear-scalarization baselines, SURF/CDF
-  refinement, evaluation, and souping utilities.
+  alignment with two reward models, linear-scalarization baselines, SURF, evaluation, and souping utilities.
 
-The DST and FishWood notebooks also contain follow-up implementations of NBI,
-epsilon-constraint, continuation, and equal-spacing baselines.
+The DST and FishWood notebooks include both the submitted-paper baselines
+and follow-up implementations of NBI, epsilon-constraint, continuation, and equal-spacing methods.
 
 ### Post-submission diagnostics
 
@@ -36,7 +35,7 @@ epsilon-constraint, continuation, and equal-spacing baselines.
 `Tchebycheff_nonconvex/run_experiments.py` reproduces the exact-inner-solver
 ZDT2/Circle diagnostic and writes figures and `figure/metrics.txt`.
 
-Run the two-objective benchmark suite from the repository root:
+In `benchmark_moo/`, run the two-objective benchmark suite from the repository root:
 
 ```bash
 MPLCONFIGDIR=/tmp/matplotlib ../.venv/bin/python benchmark_moo/run_benchmarks.py
@@ -79,8 +78,7 @@ launching large runs.
 - `HV`: Two-dimensional hypervolume, with sign conventions adjusted for
   maximization or minimization.
 
-For disconnected fronts, `ComponentCV` and `ComponentGapRatio` exclude jumps
-between components.
+
 
 ## Acknowledgements
 
