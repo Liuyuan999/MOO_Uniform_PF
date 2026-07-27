@@ -23,7 +23,8 @@ weighted Chebyshev scalarization on non-convex and benchmark Pareto fronts.
   alignment with two reward models, linear-scalarization baselines, SURF/CDF
   refinement, evaluation, and souping utilities.
 
-The DST and FishWood notebooks also contain follow-up baseline extensions.
+The DST and FishWood notebooks also contain follow-up implementations of NBI,
+epsilon-constraint, continuation, and equal-spacing baselines.
 
 ### Post-submission diagnostics
 
@@ -69,12 +70,6 @@ launching large runs.
 
 
 
-## Reproducibility notes
-
-The DST and FishWood notebooks include follow-up implementations of NBI,
-epsilon-constraint, continuation, and equal-spacing baselines. Only the
-submitted-paper baselines have multi-seed tables; rerun the extended cells
-before reporting aggregate results for the follow-up baselines.
 
 ## Metrics
 
