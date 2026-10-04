@@ -5,6 +5,19 @@ This repository contains the submitted-paper experiments, which use linear
 scalarization, and separate post-submission diagnostics that extend SURF to
 weighted Chebyshev scalarization on non-convex and benchmark Pareto fronts.
 
+## Citation
+
+```
+@inproceedings{jiang2026surf,
+  author    = {Jiang, Liuyuan and Huang, Chentong and Chen, Lisha},
+  title     = {{SURF}: Steering the Scalarization Weight to Uniformly Traverse the {Pareto} Front},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026},
+  url       = {https://arxiv.org/abs/2605.20619}
+}
+```
+
+
 ## Repository layout
 
 ### Submitted-paper experiments
