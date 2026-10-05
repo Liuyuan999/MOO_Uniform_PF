@@ -12,8 +12,7 @@ weighted Chebyshev scalarization on non-convex and benchmark Pareto fronts.
   author    = {Jiang, Liuyuan and Huang, Chentong and Chen, Lisha},
   title     = {{SURF}: Steering the Scalarization Weight to Uniformly Traverse the {Pareto} Front},
   booktitle = {Advances in Neural Information Processing Systems},
-  year      = {2026},
-  url       = {https://arxiv.org/abs/2605.20619}
+  year      = {2026}
 }
 ```
 
