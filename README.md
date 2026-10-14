@@ -5,6 +5,11 @@ This repository contains the submitted-paper experiments, which use linear
 scalarization, and separate post-submission diagnostics that extend SURF to
 weighted Chebyshev scalarization on non-convex and benchmark Pareto fronts.
 
+
+## Paper
+
+📄 **Paper:** [SURF: Steering the Scalarization Weight to Uniformly Traverse the Pareto Front](https://arxiv.org/pdf/2605.20619)
+
 ## Citation
 
 ```
