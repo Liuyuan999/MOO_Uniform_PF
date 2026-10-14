@@ -1,4 +1,4 @@
-# SURF: Steering Scalarization Weights to Uniformly Traverse the Pareto Front
+# SURF: Steering the Scalarization Weights to Uniformly Traverse the Pareto Front
 
 SURF is a scalarization-based framework for sampling a Pareto front uniformly.
 This repository contains the submitted-paper experiments, which use linear
